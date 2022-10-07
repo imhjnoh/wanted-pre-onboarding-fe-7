@@ -6,6 +6,7 @@ export const globalStyle = css`
     padding: 0;
     box-sizing: border-box;
     outline-style: none;
+    font-family: "DungGeunMo";
   }
   ul,
   li {
@@ -22,19 +23,19 @@ export const globalStyle = css`
     vertical-align: middle;
   }
   html {
-    font-size: 16px;
+    font-size: 30px;
     @media (max-width: 1280px) {
-      font-size: 8px;
+      font-size: 30px;
     }
     @media (max-width: 1024px) {
-      font-size: 10px;
+      font-size: 30px;
     }
   }
 
   body {
     font-size: 1rem;
     padding: 0;
-    font-family: "Pretendard";
+    font-family: "DungGeunMo";
   }
   h1,
   h2,
@@ -48,6 +49,17 @@ export const globalStyle = css`
   }
   button {
     cursor: pointer;
+    padding: 0.2rem;
+    border: none;
+  }
+  input {
+    border: none;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 
   // 기본
@@ -76,5 +88,12 @@ export const globalStyle = css`
     font-weight: 700;
     font-style: normal;
     font-display: swap;
+  }
+  @font-face {
+    font-family: "DungGeunMo";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
   }
 `;

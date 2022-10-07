@@ -8,6 +8,7 @@ declare module "@emotion/react" {
       positive: string;
       negative: string;
       bg: string;
+      disabled: string;
     };
   }
 }

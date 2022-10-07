@@ -6,6 +6,7 @@ export const DefaultTheme: Theme = {
     secondary: "#FC942D",
     positive: "#2CF273",
     negative: "#E635C5",
-    bg: "#FFF2DD",
+    bg: "#ffffff",
+    disabled: "#cecece",
   },
 };
