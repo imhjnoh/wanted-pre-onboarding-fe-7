@@ -7,8 +7,9 @@ const Container = styled("div")`
   background-color: ${({ theme }) => theme.colors.bg};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding: 2rem 1rem;
 `;
 
 export default Container;

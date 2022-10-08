@@ -1,6 +1,7 @@
-import { Axios, AxiosError, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import { useCallback, useEffect, useState } from "react";
-import { AuthButton, AuthInput, TitleTypography } from "../components";
+import { useNavigate } from "react-router-dom";
+import { AuthButton, AuthInput, TitleTypography } from "../ui";
 import { todoApi } from "../utils/apis";
 import { ApiError } from "../utils/interfaces";
 
@@ -9,6 +10,7 @@ const SignIn = () => {
   const [password, setPassword] = useState<string>("");
   const [signup, setSignup] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const validation = useCallback(() => {
     if (email.match(/@/g) && password.length >= 8) setIsValid(true);
@@ -21,7 +23,8 @@ const SignIn = () => {
       res = signup
         ? await todoApi.signUp(email, password)
         : await todoApi.signIn(email, password);
-      console.log(res);
+      localStorage.setItem("token", res.data.access_token);
+      navigate("/todo");
     } catch (err) {
       const e = err as AxiosError;
       const errorData = e.response?.data as ApiError;
@@ -35,7 +38,6 @@ const SignIn = () => {
 
   useEffect(() => {
     validation();
-    console.log("asd");
   }, [email, password, validation]);
 
   return (

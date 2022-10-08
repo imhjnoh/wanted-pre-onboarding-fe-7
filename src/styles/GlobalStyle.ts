@@ -12,6 +12,9 @@ export const globalStyle = css`
   li {
     list-style: none;
     cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
   }
   a,
   a:visited {
@@ -23,13 +26,20 @@ export const globalStyle = css`
     vertical-align: middle;
   }
   html {
-    font-size: 30px;
+    font-size: 20px;
     @media (max-width: 1280px) {
-      font-size: 30px;
+      font-size: 20px;
     }
     @media (max-width: 1024px) {
-      font-size: 30px;
+      font-size: 20px;
     }
+  }
+
+  select,
+  input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 
   body {
