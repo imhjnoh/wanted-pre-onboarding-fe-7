@@ -22,13 +22,17 @@ const Todo = () => {
 
   const addTodo = async () => {
     const newTodoList = todolist;
-    try {
-      const res = await todoApi.createTodo(newTodo);
-      const newdata: TodoResponse = res.data;
-      console.log(newdata);
-      setTodolist([...newTodoList, newdata]);
-    } catch (error) {
-      alert("문제가 발생했습니다.");
+    if (newTodo !== "") {
+      try {
+        const res = await todoApi.createTodo(newTodo);
+        const newdata: TodoResponse = res.data;
+        console.log(newdata);
+        setTodolist([...newTodoList, newdata]);
+      } catch (error) {
+        alert("문제가 발생했습니다.");
+      }
+    } else {
+      alert("내용을 입력해주세요.");
     }
   };
 
@@ -47,7 +51,9 @@ const Todo = () => {
 
   const updateTodo = async (id: number, todo: string, isCompleted: boolean) => {
     try {
-      await todoApi.updateTodo(id, todo, isCompleted);
+      const res = await todoApi.updateTodo(id, todo, isCompleted);
+      let newtodo = todolist.map((x) => (x.id === id ? res.data : x));
+      setTodolist(newtodo);
     } catch (error) {
       alert("문제가 발생했습니다.");
     }
@@ -88,7 +94,7 @@ const Todo = () => {
           onChange={(e) => setNewTodo(e.target.value)}
           onKeyPress={(e) => e.key === "Enter" && addTodo()}
         />
-        <BigOrangeButton>✚</BigOrangeButton>
+        <BigOrangeButton onClick={addTodo}>✚</BigOrangeButton>
       </div>
       <ul>
         {[...todolist].map((todo) => (

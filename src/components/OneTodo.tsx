@@ -12,33 +12,30 @@ interface TodoProps {
 }
 
 const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
-  const [oneTodo, setOneTodo] = useState<TodoResponse>(todoData);
   const [modMode, setModMode] = useState<boolean>(false);
-  const [newTodo, setNewTodo] = useState<string>(todoData.todo);
+  const [newTodo, setNewTodo] = useState<string>({ ...todoData }.todo);
 
   const updateTodoText = async () => {
-    if (newTodo !== "") {
-      if (modMode && newTodo !== oneTodo.todo) {
-        setOneTodo({ ...oneTodo, todo: newTodo });
-        await updateTodo(oneTodo.id, newTodo, oneTodo.isCompleted);
+    if (modMode) {
+      if (newTodo !== "" && newTodo !== todoData.todo) {
+        await updateTodo(todoData.id, newTodo, todoData.isCompleted);
         setModMode(false);
       } else {
-        setModMode(true);
+        setModMode(false);
       }
     } else {
-      alert("내용을 입력해주세요!");
+      setModMode(true);
     }
   };
 
   return (
     <div className="some" css={todostyle}>
-      <TodoWrapper isCompleted={oneTodo.isCompleted}>
+      <TodoWrapper isCompleted={todoData.isCompleted}>
         <CheckBox
           type="checkbox"
-          checked={oneTodo.isCompleted}
+          checked={todoData.isCompleted}
           onChange={(e) => {
-            setOneTodo({ ...oneTodo, isCompleted: e.target.checked });
-            updateTodo(oneTodo.id, oneTodo.todo, e.target.checked);
+            updateTodo(todoData.id, todoData.todo, e.target.checked);
           }}
         />
         {modMode ? (
@@ -48,7 +45,7 @@ const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
             onChange={(e) => setNewTodo(e.target.value)}
           />
         ) : (
-          <p>{oneTodo.todo}</p>
+          <p>{todoData.todo}</p>
         )}
       </TodoWrapper>
       <div className="todobuttonWrapper">
