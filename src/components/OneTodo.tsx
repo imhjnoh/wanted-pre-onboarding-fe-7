@@ -14,12 +14,30 @@ interface TodoProps {
 const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
   const [modMode, setModMode] = useState<boolean>(false);
   const [newTodo, setNewTodo] = useState<string>({ ...todoData }.todo);
+  const [newCheck, setNewCheck] = useState<boolean>(
+    { ...todoData }.isCompleted
+  );
+
+  const updateTodoCheck = async (check: boolean) => {
+    if (modMode) {
+      setNewCheck(check);
+    } else {
+      alert("수정모드에서만 완료 설정이 가능해요!");
+    }
+  };
 
   const updateTodoText = async () => {
     if (modMode) {
-      if (newTodo !== "" && newTodo !== todoData.todo) {
-        await updateTodo(todoData.id, newTodo, todoData.isCompleted);
+      if (
+        (newTodo !== "" && newTodo !== todoData.todo) ||
+        newCheck !== todoData.isCompleted
+      ) {
+        console.log(newCheck);
+
+        await updateTodo(todoData.id, newTodo, newCheck);
         setModMode(false);
+      } else if (newTodo === "") {
+        alert("내용을 입력해주세요!");
       } else {
         setModMode(false);
       }
@@ -33,10 +51,8 @@ const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
       <TodoWrapper isCompleted={todoData.isCompleted}>
         <CheckBox
           type="checkbox"
-          checked={todoData.isCompleted}
-          onChange={(e) => {
-            updateTodo(todoData.id, todoData.todo, e.target.checked);
-          }}
+          checked={newCheck}
+          onChange={(e) => updateTodoCheck(e.target.checked)}
         />
         {modMode ? (
           <TodoInput
@@ -56,6 +72,17 @@ const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
         {!modMode && (
           <BigOrangeButton onClick={() => deleteTodo(todoData.id)}>
             삭제
+          </BigOrangeButton>
+        )}
+        {modMode && (
+          <BigOrangeButton
+            onClick={() => {
+              setModMode(false);
+              setNewCheck(todoData.isCompleted);
+              setNewTodo(todoData.todo);
+            }}
+          >
+            취소
           </BigOrangeButton>
         )}
       </div>
