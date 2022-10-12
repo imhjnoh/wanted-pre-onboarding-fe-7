@@ -1,4 +1,3 @@
-import { Theme } from "@emotion/react";
 import styled from "@emotion/styled";
 
 interface TodoWrapperProps {

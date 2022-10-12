@@ -36,7 +36,7 @@ const Todo = () => {
     const newTodoList = todolist;
     if (window.confirm("정말로 삭제할까요?")) {
       try {
-        const res = await todoApi.deleteTodo(id);
+        await todoApi.deleteTodo(id);
         setTodolist(newTodoList.filter((x) => x.id !== id));
         alert("삭제가 완료되었습니다.");
       } catch (error) {
