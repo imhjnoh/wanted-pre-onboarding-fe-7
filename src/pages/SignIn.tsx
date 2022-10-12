@@ -58,18 +58,16 @@ const SignIn = () => {
         />
         {!signup ? (
           <AuthButton type="button" onClick={onSign} disabled={!isValid}>
-            SIGN_IN
+            로그인
           </AuthButton>
         ) : (
           <AuthButton type="button" onClick={onSign} disabled={!isValid}>
-            SIGN_UP
+            회원가입
           </AuthButton>
         )}
       </form>
       {!signup && (
-        <button onClick={() => setSignup(true)}>
-          or..click here to signup❤︎
-        </button>
+        <button onClick={() => setSignup(true)}>여기를 클릭해 회원가입❤</button>
       )}
     </div>
   );

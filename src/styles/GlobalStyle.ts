@@ -64,6 +64,7 @@ export const globalStyle = css`
   }
   input {
     border: none;
+    background-color: transparent;
   }
 
   form {
