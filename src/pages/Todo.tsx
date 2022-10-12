@@ -28,6 +28,7 @@ const Todo = () => {
         const newdata: TodoResponse = res.data;
         console.log(newdata);
         setTodolist([...newTodoList, newdata]);
+        setNewTodo("");
       } catch (error) {
         alert("문제가 발생했습니다.");
       }

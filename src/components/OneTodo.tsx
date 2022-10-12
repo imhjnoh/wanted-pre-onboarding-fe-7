@@ -43,6 +43,7 @@ const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
             type="text"
             value={newTodo}
             onChange={(e) => setNewTodo(e.target.value)}
+            ref={(c) => c?.focus()}
           />
         ) : (
           <p>{todoData.todo}</p>
@@ -50,7 +51,7 @@ const OneTodo = ({ todoData, deleteTodo, updateTodo }: TodoProps) => {
       </TodoWrapper>
       <div className="todobuttonWrapper">
         <BigOrangeButton onClick={updateTodoText}>
-          {modMode ? "수정완료" : "수정"}
+          {modMode ? "제출" : "수정"}
         </BigOrangeButton>
         {!modMode && (
           <BigOrangeButton onClick={() => deleteTodo(todoData.id)}>
@@ -66,8 +67,6 @@ const todostyle = (theme: Theme) => css`
   display: flex;
   width: 100%;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   background-color: ${theme.colors.primary};
   height: 3rem;
   padding: 0;
@@ -88,7 +87,6 @@ const todostyle = (theme: Theme) => css`
   }
   input[type="text"] {
     padding: 0.5rem 0rem;
-    width: 20rem;
   }
 `;
 
